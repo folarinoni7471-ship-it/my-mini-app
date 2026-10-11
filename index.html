@@ -1,47 +1,47 @@
-<script src='//libtl.com/sdk.js' data-zone='12002322' data-sdk='show_12002322'></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Mini App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Telegram Mini App</title>
+
+  <!-- 1. Telegram WebApp SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body {
-      font-family: -apple-system, sans-serif;
-      background: var(--tg-theme-bg-color, #fff);
-      color: var(--tg-theme-text-color, #000);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-    }
-    button {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      background: var(--tg-theme-button-color, #2481cc);
-      color: var(--tg-theme-button-text-color, #fff);
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 16px;
-    }
-  </style>
+
+  <!-- 2. Monetag SDK Script Tag (Loads the ad library with your Zone ID) -->
+  <script src="https://alwingulla.com/88/tag.min.js" data-zone="12002322" async data-cfasync="false"></script>
 </head>
 <body>
-  <h1 id="greeting">Hello!</h1>
-  <p>This is my first Telegram Mini App 🎉</p>
-  <button onclick="Telegram.WebApp.close()">Close</button>
 
+  <h1>Welcome to My Mini App</h1>
+
+  <!-- 3. Your combined JavaScript logic -->
   <script>
+    // Initialize Telegram WebApp
     const tg = window.Telegram.WebApp;
     tg.ready();
     tg.expand();
+    console.log("Telegram User Info:", tg.initDataUnsafe?.user);
 
-    const user = tg.initDataUnsafe?.user;
-    if (user) {
-      document.getElementById('greeting').textContent = `Hello, ${user.first_name}!`;
-    }
+    // Initialize Monetag In-App Ads after the page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof show_12002322 === 'function') {
+        show_12002322({
+          type: 'inApp',
+          inAppSettings: {
+            frequency: 2,
+            capping: 0.1,
+            interval: 30,
+            timeout: 5,
+            everyPage: false
+          }
+        });
+        console.log("Monetag ads initialized successfully.");
+      } else {
+        console.warn("Monetag script failed to load.");
+      }
+    });
   </script>
+
 </body>
 </html>
