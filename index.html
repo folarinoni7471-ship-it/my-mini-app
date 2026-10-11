@@ -3,27 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Telegram Mini App</title>
+  <title>Telegram Mini App</title>
 
   <!-- 1. Telegram WebApp SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- 2. Monetag SDK Script Tag (Loads the ad library with your Zone ID) -->
+  <!-- 2. Monetag SDK Script Tag -->
   <script src="https://alwingulla.com/88/tag.min.js" data-zone="12002322" async data-cfasync="false"></script>
 </head>
 <body>
 
-  <h1>Welcome to My Mini App</h1>
+  <!-- Your Mini App UI Content -->
+  <h1>My Telegram Mini App</h1>
+  <p>Welcome to the app!</p>
 
-  <!-- 3. Your combined JavaScript logic -->
+  <!-- 3. Combined Application Script -->
   <script>
-    // Initialize Telegram WebApp
+    // Initialize Telegram Mini App Features
     const tg = window.Telegram.WebApp;
     tg.ready();
     tg.expand();
+    
+    // Log Telegram User Details to Browser Console
     console.log("Telegram User Info:", tg.initDataUnsafe?.user);
 
-    // Initialize Monetag In-App Ads after the page loads
+    // Trigger Monetag In-App Timed Ads
     window.addEventListener('DOMContentLoaded', () => {
       if (typeof show_12002322 === 'function') {
         show_12002322({
@@ -38,7 +42,7 @@
         });
         console.log("Monetag ads initialized successfully.");
       } else {
-        console.warn("Monetag script failed to load.");
+        console.warn("Monetag script is not loaded or blocked.");
       }
     });
   </script>
